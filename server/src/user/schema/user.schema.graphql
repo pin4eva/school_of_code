@@ -1,0 +1,45 @@
+scalar Date
+
+type User {
+  id: String
+  name: String
+  firstName: String
+  lastName: String
+  google_id: String
+  visibility: Boolean
+  isActive: Boolean
+  customers: [User]
+  email: String
+  emailToken: String
+  role: String
+  accountType: String
+  connections: [User]
+  lastSeen: Date
+  image: String
+  state: String
+  lga: String
+  phone: String
+}
+
+type Query {
+  getUsers: [User]
+  getUser(id: ID): User
+  me: User
+  verifyToChangePassword(id: ID, token: String): User
+}
+type Mutation {
+  updateUser(input: SignupInput): User
+  deleteUser(id: ID): User
+  validateUsername(username: String): Boolean
+  validateEmail(email: String): Boolean
+  uploadImage(image: String): User
+  changeRole(id: ID, role: String): User
+  changeAccountType(id: ID, accountType: String): User
+  deleteAllUsers: [User]
+}
+
+input UserInput {
+  name: String
+  email: String
+  password: String
+}

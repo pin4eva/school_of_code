@@ -1,0 +1,48 @@
+scalar Date
+
+type LoginResponse {
+  id: ID
+  token: String
+  isActive: Boolean
+  user: User
+}
+
+type Query {
+  me: User
+  verifyToken(token: String): User
+  verifyToChangePassword(id: ID, token: String): User
+}
+
+type Mutation {
+  createUser(input: UserInput): User
+  signup(input: SignupInput): User
+  login(email: String, password: String): LoginResponse
+  verifyToken(token: String): User
+  verifyOTP(otp: Int): User
+  resendVerification(id: ID): User
+  forgotPassword(phone: String): User
+  changeAuthPassword(password: String!, oldPassword: String!): User
+  changePassword(id: ID!, password: String!): User
+  checkEmail(email: String): User
+  validateUsername(username: String): Boolean
+  validateEmail(email: String): Boolean
+  newPassword(password: String): User
+  resendOtp(phone: String): User
+  loginWithPhone(input: LoginWithPhoneInput): LoginResponse
+  registerWithEmail(email: String, password: String): User
+}
+
+input LoginWithPhoneInput {
+  phone: String
+  password: String
+}
+
+input SignupInput {
+  id: ID
+  firstName: String
+  lastName: String
+  name: String
+  password: String
+  phone: String
+  email: String
+}
